@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const { Search } = Input;
 
-function UserTable({ users }) {
+function UserTable({ users, onDelete  }) {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -33,9 +33,14 @@ function UserTable({ users }) {
             <Card 
               title={`${user.name}`}
               extra={
-                <Button type="link" onClick={() => navigate(`/user/${user.id}`)}>
-                  Details
-                </Button>
+                <>
+                  <Button type="link" onClick={() => navigate(`/user/${user.id}`)}>
+                    Details
+                  </Button>
+                  <Button type="link" danger onClick={() => onDelete(user.id)}>
+                    Delete
+                  </Button>
+                </>
               }
             >
               <p><strong>Email:</strong> {user.email}</p>
